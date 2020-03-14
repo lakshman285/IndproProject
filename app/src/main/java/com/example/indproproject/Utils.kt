@@ -8,7 +8,6 @@ import android.os.Build
 /**
  * this utils class contains all the utility classes, constants of this project
  */
-
 object Constants {
 
     const val BASE_URL = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/"

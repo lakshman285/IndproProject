@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * this class is used to build retrofit for api calls
  */
 object ApiClient {
-    var retrofit: Retrofit? = null
+    private var retrofit: Retrofit? = null
     @get:Synchronized
     val instance: ApiInterface
         get() {

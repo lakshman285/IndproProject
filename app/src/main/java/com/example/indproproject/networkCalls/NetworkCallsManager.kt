@@ -10,11 +10,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 /**
- * this class is contains success and failure methods while gettig response from server
+ * this class is contains success and failure methods while getting response from server
  */
-class NetworkCallsManager private constructor() {
+class NetworkCallsManager{
 
-    val instance = NetworkCallsManager()
     var mutableLiveData: MutableLiveData<Facts>? = null
     var apiManager: ApiInterface = NetworkManager.api!!
 

@@ -3,6 +3,9 @@ package com.example.indproproject.networkManager
 import com.example.indproproject.networkCalls.ApiClient
 import com.example.indproproject.networkCalls.ApiInterface
 
+/**
+ * used to get api interface instance
+ */
 object NetworkManager {
     private var apiInterface: ApiInterface? = null
     val api: ApiInterface?

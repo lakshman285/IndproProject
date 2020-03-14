@@ -27,11 +27,11 @@ data class Facts(
 data class Row(
     @SerializedName(Constants.TITLE)
     @Expose
-    var title: String,
+    var title: String?,
     @SerializedName(Constants.DESCRIPTION)
     @Expose
-    var description: String,
+    var description: String?,
     @SerializedName(Constants.IMAGE_HREF)
     @Expose
-    var imageHref: String
+    var imageHref: String?
 )
