@@ -1,7 +1,8 @@
-package com.example.indproproject
+package com.example.indproproject.modules
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.indproproject.R
 
 class HomeActivity : AppCompatActivity() {
 
