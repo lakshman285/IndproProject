@@ -30,18 +30,25 @@
             app:title="@{model.title}"
             app:titleTextColor="@color/colorWhite" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvFacts"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srlFacts"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_8dp"
-            android:adapter="@{adapter}"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tbFacts" />
+            app:layout_constraintTop_toBottomOf="@+id/tbFacts">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFacts"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:adapter="@{adapter}"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

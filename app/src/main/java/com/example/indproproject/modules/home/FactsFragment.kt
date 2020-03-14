@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.indproproject.R
 import com.example.indproproject.adapters.FactsAdapter
 import com.example.indproproject.databinding.FragmentFactsBinding
@@ -29,6 +30,10 @@ class FactsFragment : Fragment() {
     private var rowList: List<Row> = ArrayList<Row>()
     private lateinit var factsAdapter: FactsAdapter
 
+    private val srlFacts: SwipeRefreshLayout by lazy {
+        activity!!.findViewById<SwipeRefreshLayout>(R.id.srlFacts)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,8 +51,20 @@ class FactsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        srlFacts.setColorSchemeResources(R.color.colorPrimaryDark)
         factsAdapter = FactsAdapter()
         fragmentHomeBinding.adapter = factsAdapter
+        displayCountryFacts()
+        srlFacts.setOnRefreshListener {
+            srlFacts.isRefreshing = false
+            displayCountryFacts()
+        }
+    }
+
+    /**
+     * method used to display list of facts
+     */
+    private fun displayCountryFacts() {
         if (isInternetAvailable(activity!!)) {
             rowViewModel.getFacts()!!.observe(activity!!,
                 Observer { facts ->
@@ -75,6 +92,5 @@ class FactsFragment : Fragment() {
                 context!!.toast(getString(R.string.txt_please_check_your_internet_connection))
             }
         }
-
     }
 }
