@@ -1,5 +1,7 @@
 package com.example.indproproject.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.indproproject.Constants
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -24,7 +26,10 @@ data class Facts(
  * @param description details about the country
  * @param imageHref image of the country
  */
+@Entity
 data class Row(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int,
     @SerializedName(Constants.TITLE)
     @Expose
     var title: String?,
@@ -34,4 +39,10 @@ data class Row(
     @SerializedName(Constants.IMAGE_HREF)
     @Expose
     var imageHref: String?
-)
+) {
+    constructor(
+        title: String,
+        description: String?,
+        imageHref: String?
+    ) : this(0, title, description,imageHref)
+}
