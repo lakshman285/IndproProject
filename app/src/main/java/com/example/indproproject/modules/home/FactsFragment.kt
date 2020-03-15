@@ -1,5 +1,6 @@
 package com.example.indproproject.modules.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,21 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.indproproject.Constants
 import com.example.indproproject.R
 import com.example.indproproject.adapters.FactsAdapter
 import com.example.indproproject.databinding.FragmentFactsBinding
 import com.example.indproproject.isInternetAvailable
+import com.example.indproproject.listener.ItemClickListener
 import com.example.indproproject.localDatabase.RowRepository
 import com.example.indproproject.models.Row
-import kotlinx.android.synthetic.main.fragment_facts.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
+
 
 /**
  * A simple [Fragment] subclass.
  * used to display list of facts of a country
  */
-class FactsFragment : Fragment() {
+class FactsFragment : Fragment(), ItemClickListener {
 
     private lateinit var rowViewModel: RowViewModel
     private lateinit var fragmentHomeBinding: FragmentFactsBinding
@@ -52,7 +56,7 @@ class FactsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         srlFacts.setColorSchemeResources(R.color.colorPrimaryDark)
-        factsAdapter = FactsAdapter()
+        factsAdapter = FactsAdapter(this)
         fragmentHomeBinding.adapter = factsAdapter
         displayCountryFacts()
         srlFacts.setOnRefreshListener {
@@ -90,7 +94,16 @@ class FactsFragment : Fragment() {
                 }
             }else {
                 context!!.toast(getString(R.string.txt_please_check_your_internet_connection))
+                fragmentHomeBinding.tbFacts.title = getString(R.string.txt_no_internet)
             }
+        }
+    }
+
+    override fun onClickItem(obj: Any) {
+        if (obj is Int) {
+            context!!.startActivity(Intent(context, FactDetailsActivity::class.java)
+                .putExtra(Constants.TITLE,rowList[obj].title)
+                .putExtra(Constants.DESCRIPTION, rowList[obj].description))
         }
     }
 }

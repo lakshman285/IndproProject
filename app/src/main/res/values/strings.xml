@@ -5,4 +5,8 @@
     <string name="txt_description">Description</string>
     <string name="txt_please_check_your_internet_connection">PLease check your internet connection</string>
     <string name="txt_no_internet">No Internet</string>
+    <string name="txt_fact_details">Fact Details</string>
+    <string name="txt_save">Save</string>
+    <string name="txt_fact_details_success_message">Fact details saved successfully</string>
+    <string name="txt_fact_details_error_message">Please fill required details.</string>
 </resources>

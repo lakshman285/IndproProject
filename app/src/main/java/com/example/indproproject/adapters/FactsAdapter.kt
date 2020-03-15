@@ -10,12 +10,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.indproproject.R
 import com.example.indproproject.databinding.ItemFactsLayoutBinding
+import com.example.indproproject.listener.ItemClickListener
 import com.example.indproproject.models.Row
 
 /**
  * this adapter is used to set lists of facts
  */
-class FactsAdapter : RecyclerView.Adapter<FactsAdapter.FactsViewHolder>() {
+class FactsAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Adapter<FactsAdapter.FactsViewHolder>() {
 
     private var rows: List<Row> = ArrayList<Row>()
 
@@ -35,16 +36,21 @@ class FactsAdapter : RecyclerView.Adapter<FactsAdapter.FactsViewHolder>() {
 
     inner class FactsViewHolder(binding: ItemFactsLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val itemLayoutBinding: ItemFactsLayoutBinding?
+        private val itemLayoutBinding: ItemFactsLayoutBinding?
         init {
             itemLayoutBinding = binding
+        }
+        fun bindFacts(position: Int, itemClickListener: ItemClickListener) {
+            itemLayoutBinding!!.model = rows[position]
+            itemLayoutBinding.pos = position
+            itemLayoutBinding.listener = itemClickListener
         }
     }
 
     override fun getItemCount() = rows.size
 
     override fun onBindViewHolder(holder: FactsViewHolder, position: Int) {
-        holder.itemLayoutBinding!!.model = rows[position]
+        holder.bindFacts(position, itemClickListener)
     }
 }
 
